@@ -25,7 +25,9 @@ def get_weather(lat, lon):
     params = {
         "latitude": lat,
         "longitude": lon,
-        "current_weather": True
+        "current_weather": True,
+        "temperature_unit": "fahrenheit",
+        "windspeed_unit": "mph"
     }
 
     response = requests.get(url, params=params)
@@ -33,8 +35,8 @@ def get_weather(lat, lon):
         data = response.json()
         weather = data.get("current_weather", {})
         print(f"\n🌍 Location: ({lat}, {lon})")
-        print(f"🌡️ Temperature: {weather.get('temperature')}°C")
-        print(f"💨 Wind Speed: {weather.get('windspeed')} km/h")
+        print(f"🌡️ Temperature: {weather.get('temperature')}°F")
+        print(f"💨 Wind Speed: {weather.get('windspeed')} mph")
     else:
         print(f"❌ Failed to fetch weather. Status code: {response.status_code}")
 
